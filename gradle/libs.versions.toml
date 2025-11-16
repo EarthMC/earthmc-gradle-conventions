@@ -1,0 +1,7 @@
+[versions]
+spotless = "8.0.0"
+shadow = "9.2.2"
+
+[libraries]
+spotless = { group = "com.diffplug.spotless", name = "com.diffplug.spotless.gradle.plugin", version.ref = "spotless" }
+shadow = { group = "com.gradleup.shadow", name = "shadow-gradle-plugin", version.ref = "shadow" }
