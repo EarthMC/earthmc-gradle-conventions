@@ -1,6 +1,6 @@
 
 plugins {
-    id("net.earthmc.conventions.java-conventions")
+    id("net.earthmc.conventions.java")
     id("java-library")
     id("maven-publish")
     id("com.gradleup.shadow") apply false
