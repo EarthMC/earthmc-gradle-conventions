@@ -20,4 +20,7 @@ open class PublishingExtension {
     var snapshotRepository: String = "snapshots"
 
     var internalPostfix: String = "-internal"
+
+    var artifactId: String? = null
+    var groupId: String? = null
 }

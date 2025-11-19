@@ -3,7 +3,7 @@ plugins {
     id("com.diffplug.spotless")
 }
 
-val extension: EarthMCExtension = if (project == rootProject) {
+val extension: EarthMCExtension = if (project == rootProject || rootProject.extensions.findByType(EarthMCExtension::class) == null) {
     project.extensions.create("earthmc", EarthMCExtension::class)
 } else {
     rootProject.extensions.getByType(EarthMCExtension::class)
@@ -28,8 +28,6 @@ project.afterEvaluate {
 
         java {
             toggleOffOn()
-
-            encoding = Charsets.UTF_8
 
             replaceRegex(
                 "Remove blank lines before closing bracket",

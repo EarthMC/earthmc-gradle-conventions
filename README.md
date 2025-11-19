@@ -12,5 +12,7 @@ pluginManagement {
 
 `build.gradle.kts`
 ```kotlin
-id("net.earthmc.conventions.java") version "1.0.1"
+plugins {
+    id("net.earthmc.conventions.java") version "1.0.2"
+}
 ```

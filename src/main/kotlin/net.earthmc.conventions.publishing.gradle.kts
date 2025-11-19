@@ -16,8 +16,8 @@ val javadocJar by tasks.registering(Jar::class) {
     from(tasks.named("javadoc"))
 }
 
-val extension: PublishingExtension = if (project == rootProject) {
-    rootProject.extensions.getByType(EarthMCExtension::class).publishing
+val extension: PublishingExtension = if (project == rootProject || project.extensions.findByType(EarthMCExtension::class) != null) {
+    project.extensions.getByType(EarthMCExtension::class).publishing
 } else {
     project.extensions.create("earthmcPublish", PublishingExtension::class)
 }
@@ -25,10 +25,10 @@ val extension: PublishingExtension = if (project == rootProject) {
 project.afterEvaluate {
     publishing {
         shadow.addShadowVariantIntoJavaComponent = false
+        val ext = extension
 
         repositories {
             maven {
-                val ext = extension
                 val repository = if (project.version.toString().endsWith("-SNAPSHOT")) ext.snapshotRepository else ext.releaseRepository
                 var repositoryUrl = ext.baseUrl + repository
 
@@ -49,6 +49,14 @@ project.afterEvaluate {
 
                 artifact(sourcesJar)
                 artifact(javadocJar)
+
+                ext.artifactId.let { id ->
+                    artifactId = id
+                }
+
+                ext.groupId.let { group ->
+                    groupId = group
+                }
             }
         }
     }
