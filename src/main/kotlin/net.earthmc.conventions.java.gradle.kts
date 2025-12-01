@@ -24,7 +24,14 @@ project.afterEvaluate {
     }
 
     spotless {
-        ratchetFrom("origin/${extension.mainBranch}")
+        val mainBranch = providers.exec {
+            commandLine("git", "symbolic-ref", "refs/remotes/origin/HEAD")
+            isIgnoreExitValue = true
+        }.standardOutput.asText.orNull?.trim()?.substringAfterLast("/") // refs/remotes/origin/main -> main
+
+        if (mainBranch != null && !mainBranch.isEmpty()) {
+            ratchetFrom("origin/${mainBranch}")
+        }
 
         java {
             toggleOffOn()

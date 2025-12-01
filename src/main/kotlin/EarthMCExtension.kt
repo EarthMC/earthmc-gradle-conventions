@@ -2,7 +2,6 @@ import org.gradle.api.Action
 import org.gradle.api.JavaVersion
 
 open class EarthMCExtension {
-    var mainBranch: String = "main"
     var javaVersion: JavaVersion = JavaVersion.VERSION_21
 
     val publishing: PublishingExtension = PublishingExtension()
