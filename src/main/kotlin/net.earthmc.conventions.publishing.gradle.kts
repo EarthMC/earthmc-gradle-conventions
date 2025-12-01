@@ -1,9 +1,9 @@
+import com.github.jengelman.gradle.plugins.shadow.ShadowExtension
 
 plugins {
     id("net.earthmc.conventions.java")
     id("java-library")
     id("maven-publish")
-    id("com.gradleup.shadow") apply false
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
@@ -22,9 +22,14 @@ val extension: PublishingExtension = if (project == rootProject || project.exten
     project.extensions.create("earthmcPublish", PublishingExtension::class)
 }
 
+project.pluginManager.withPlugin("com.gradleup.shadow") {
+    extensions.configure<ShadowExtension>("shadow") {
+        addShadowVariantIntoJavaComponent = false
+    }
+}
+
 project.afterEvaluate {
     publishing {
-        shadow.addShadowVariantIntoJavaComponent = false
         val ext = extension
 
         repositories {
@@ -50,13 +55,8 @@ project.afterEvaluate {
                 artifact(sourcesJar)
                 artifact(javadocJar)
 
-                ext.artifactId.let { id ->
-                    artifactId = id
-                }
-
-                ext.groupId.let { group ->
-                    groupId = group
-                }
+                ext.artifactId.let { id -> artifactId = id }
+                ext.groupId.let { group -> groupId = group }
             }
         }
     }
