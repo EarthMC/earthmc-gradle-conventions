@@ -35,7 +35,7 @@ project.afterEvaluate {
         repositories {
             maven {
                 val repository = if (project.version.toString().endsWith("-SNAPSHOT")) ext.snapshotRepository else ext.releaseRepository
-                var repositoryUrl = ext.baseUrl + repository
+                var repositoryUrl = ext.repositoryUrl + (if (!ext.repositoryUrl.endsWith('/')) "/" else "") + repository
 
                 if (!ext.public) {
                     repositoryUrl += ext.internalPostfix
@@ -43,7 +43,7 @@ project.afterEvaluate {
 
                 url = uri(repositoryUrl)
 
-                name = "earthmc"
+                name = ext.repositoryName
                 credentials(PasswordCredentials::class)
             }
         }

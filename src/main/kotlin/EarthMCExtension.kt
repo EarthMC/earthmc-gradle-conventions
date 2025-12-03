@@ -15,7 +15,9 @@ open class EarthMCExtension {
 open class PublishingExtension {
     var public: Boolean = false
 
-    var baseUrl: String = "https://repo.earthmc.net/"
+    var repositoryUrl: String = "https://repo.earthmc.net/"
+    var repositoryName: String = "earthmc"
+
     var releaseRepository: String = "releases"
     var snapshotRepository: String = "snapshots"
 
