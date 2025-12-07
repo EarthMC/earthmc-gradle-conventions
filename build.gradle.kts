@@ -10,7 +10,7 @@ repositories {
 
 dependencies {
     implementation(libs.spotless)
-    implementation(libs.shadow)
+    compileOnly(libs.shadow)
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
