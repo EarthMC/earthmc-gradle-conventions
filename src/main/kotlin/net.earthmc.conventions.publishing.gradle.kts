@@ -16,10 +16,10 @@ val javadocJar by tasks.registering(Jar::class) {
     from(tasks.named("javadoc"))
 }
 
-val extension: PublishingExtension = if (project == rootProject || project.extensions.findByType(EarthMCExtension::class) != null) {
+val extension: EarthMCPublishingExtension = if (project == rootProject || project.extensions.findByType(EarthMCExtension::class) != null) {
     project.extensions.getByType(EarthMCExtension::class).publishing
 } else {
-    project.extensions.create("earthmcPublish", PublishingExtension::class)
+    project.extensions.create("earthmcPublish", EarthMCPublishingExtension::class)
 }
 
 project.pluginManager.withPlugin("com.gradleup.shadow") {
@@ -52,8 +52,13 @@ project.afterEvaluate {
             create<MavenPublication>("maven") {
                 from(components.getByName("java"))
 
-                artifact(sourcesJar)
-                artifact(javadocJar)
+                if (ext.sources) {
+                    artifact(sourcesJar)
+                }
+
+                if (ext.javadoc) {
+                    artifact(javadocJar)
+                }
 
                 ext.artifactId.let { id -> artifactId = id }
                 ext.groupId.let { group -> groupId = group }

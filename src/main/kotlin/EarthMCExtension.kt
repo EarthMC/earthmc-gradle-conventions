@@ -5,14 +5,14 @@ open class EarthMCExtension {
     var mainBranch: String? = "main"
     var javaVersion: JavaVersion = JavaVersion.VERSION_21
 
-    val publishing: PublishingExtension = PublishingExtension()
+    val publishing: EarthMCPublishingExtension = EarthMCPublishingExtension()
 
-    fun publishing(action: Action<PublishingExtension>) {
+    fun publishing(action: Action<EarthMCPublishingExtension>) {
         action.execute(publishing)
     }
 }
 
-open class PublishingExtension {
+open class EarthMCPublishingExtension {
     var public: Boolean = false
 
     var repositoryUrl: String = "https://repo.earthmc.net/"
@@ -25,4 +25,7 @@ open class PublishingExtension {
 
     var artifactId: String? = null
     var groupId: String? = null
+
+    var sources: Boolean = true
+    var javadoc: Boolean = true
 }

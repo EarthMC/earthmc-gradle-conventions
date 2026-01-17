@@ -23,6 +23,10 @@ val javadocJar by tasks.registering(Jar::class) {
     from(tasks.named("javadoc"))
 }
 
+kotlin {
+    jvmToolchain(21)
+}
+
 publishing {
     repositories {
         maven {
