@@ -26,7 +26,7 @@ project.afterEvaluate {
     spotless {
         val mainBranch = extension.mainBranch
 
-        if (mainBranch != null && !mainBranch.isEmpty()) {
+        if (!mainBranch.isNullOrEmpty()) {
             ratchetFrom("origin/${mainBranch}")
         }
 
@@ -62,7 +62,7 @@ project.afterEvaluate {
             leadingTabsToSpaces(4)
 
             removeUnusedImports()
-            forbidWildcardImports()
+            expandWildcardImports()
 
             trimTrailingWhitespace()
             endWithNewline()
