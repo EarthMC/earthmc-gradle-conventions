@@ -1,7 +1,6 @@
 import com.github.jengelman.gradle.plugins.shadow.ShadowExtension
 
 plugins {
-    id("net.earthmc.conventions.java")
     id("java-library")
     id("maven-publish")
 }
