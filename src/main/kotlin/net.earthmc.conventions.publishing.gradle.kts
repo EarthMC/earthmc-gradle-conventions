@@ -15,7 +15,7 @@ val javadocJar by tasks.registering(Jar::class) {
     from(tasks.named("javadoc"))
 }
 
-val extension: EarthMCPublishingExtension = if (project == rootProject || project.extensions.findByType(EarthMCExtension::class) != null) {
+val extension: EarthMCPublishingExtension = if (project.extensions.findByType(EarthMCExtension::class) != null) {
     project.extensions.getByType(EarthMCExtension::class).publishing
 } else {
     project.extensions.create("earthmcPublish", EarthMCPublishingExtension::class)
