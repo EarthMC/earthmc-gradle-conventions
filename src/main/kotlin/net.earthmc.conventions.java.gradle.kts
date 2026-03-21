@@ -62,7 +62,7 @@ project.afterEvaluate {
             leadingTabsToSpaces(4)
 
             removeUnusedImports()
-            expandWildcardImports()
+            forbidWildcardImports()
 
             trimTrailingWhitespace()
             endWithNewline()
