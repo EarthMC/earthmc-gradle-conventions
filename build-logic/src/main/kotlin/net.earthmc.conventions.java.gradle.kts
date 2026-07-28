@@ -51,6 +51,12 @@ project.afterEvaluate {
                 ""
             )
 
+            replaceRegex(
+                "Replace toUpper/LowerCase calls without a Locale argument",
+                "(to(?:Upper|Lower)Case)\\(\\)",
+                "$1\\(Locale.ROOT\\)"
+            )
+
             createLegacyColorMap().entries.forEach { entry ->
                 replaceRegex(
                     "Replace legacy character ${entry.key}",
