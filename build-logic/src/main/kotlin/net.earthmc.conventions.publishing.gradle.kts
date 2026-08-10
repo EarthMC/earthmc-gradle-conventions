@@ -5,12 +5,14 @@ plugins {
     id("maven-publish")
 }
 
-val sourcesJar by tasks.registering(Jar::class) {
+val sourcesJar = tasks.register<Jar>("sourcesJar") {
+    description = "Creates a sources jar"
     archiveClassifier.set("sources")
     from(sourceSets.main.get().allSource)
 }
 
-val javadocJar by tasks.registering(Jar::class) {
+val javadocJar = tasks.register<Jar>("javadocJar") {
+    description = "Creates a javadoc jar"
     archiveClassifier.set("javadoc")
     from(tasks.named("javadoc"))
 }
